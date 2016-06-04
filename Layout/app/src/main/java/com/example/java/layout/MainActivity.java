@@ -2,10 +2,14 @@ package com.example.java.layout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
+import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,8 +39,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+
+
+        //Linear List
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+//        Grid List
+/*        GridLayoutManager gridLayoutManager = new GridLayoutManager(getApplicationContext(),2);
+        recyclerView.setLayoutManager(gridLayoutManager);*/
         ArrayList<Movie> movies = new ArrayList<>();
 
         for(int i=0; i<movieStrings.length;i++) {
@@ -44,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
             movies.add(movie);
         }
         MoviesAdapter moviesAdapter = new MoviesAdapter(movies);
-        recyclerView.setAdapter(moviesAdapter);
+        recyclerView.setAdapter(new ScaleInAnimationAdapter(moviesAdapter));
+//        recyclerView.setAdapter(moviesAdapter);
 
     }
 }
